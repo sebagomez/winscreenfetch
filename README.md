@@ -8,4 +8,4 @@ WinScreenfetch is exactly that. screenfetch for Windows.
 
 <img src="./screenshot.png" alt="WinScreenfetch" width="850">
 
-The ASCII art was created thanks to this site: 				//http://www.text-image.com/convert/ascii.html
+The ASCII art was created thanks to this site: http://www.text-image.com/convert/ascii.html
