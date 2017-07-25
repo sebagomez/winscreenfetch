@@ -1,25 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace WinScreenfetch
 {
 	class Program
 	{
-		static ConsoleColor logoColor = ConsoleColor.Blue;
-		static ConsoleColor labelColor = ConsoleColor.Cyan;
-		static Settings settings = new Settings();
-		static ConsoleColor prev = Console.ForegroundColor;
-
+		
 		static void Main(string[] args)
 		{
-
+			ConsoleColor prev = Console.ForegroundColor;
 			try
 			{
 
 				Console.WriteLine();
 
-				BigLogo();
+				ConsoleColor logoColor = ConsoleColor.Blue;
+				ConsoleColor labelColor = ConsoleColor.Cyan;
+				Settings settings = new Settings();
 
+				List<Settings.Data> data = settings.GetWithLabels();
+				List<string> logo = LogoManager.Windows();
+
+				int i = 0;
+				foreach (string line in logo)
+				{
+					Console.ForegroundColor = logoColor;
+					if (i < (data.Count - 1))
+					{
+						Console.Write($"  {line}");
+						Console.ForegroundColor = labelColor;
+						if (!string.IsNullOrEmpty(data[i].Label))
+						{
+							Console.Write($"  {data[i].Label}:");
+							Console.ForegroundColor = prev;
+							Console.WriteLine($" {data[i].Value}");
+						}
+						else
+							Console.WriteLine($"  {data[i].Value}");
+					}
+					else
+						Console.WriteLine($"  {line}");
+
+					i++;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -33,71 +57,6 @@ namespace WinScreenfetch
 				if (Debugger.IsAttached)
 					Console.ReadLine();
 			}
-		}
-
-		private static void BigLogo()
-		{
-			Console.ForegroundColor = logoColor;
-			Console.Write("                                         ```...--://+oo`");
-			Console.ForegroundColor = labelColor;
-			Console.WriteLine($"    {settings.UserName}@{settings.ComputerName}");
-			Console.ForegroundColor = logoColor;
-			Console.Write("                           ```...--://+oooossyyyyyyyyyy`");
-			Console.ForegroundColor = labelColor;
-			Console.Write("    OS: ");
-			Console.ForegroundColor = prev;
-			Console.WriteLine(settings.OS);
-			Console.ForegroundColor = logoColor;
-			Console.Write("             ```...--:/+- .osssyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.ForegroundColor = labelColor;
-			Console.Write("    Manufacturer: ");
-			Console.ForegroundColor = prev;
-			Console.WriteLine(settings.Manufacturer);
-			Console.ForegroundColor = logoColor;
-			Console.Write("   ..--:/++ooosssyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.ForegroundColor = labelColor;
-			Console.Write("    Uptime: ");
-			Console.ForegroundColor = prev;
-			Console.WriteLine(settings.Uptime);
-			Console.ForegroundColor = logoColor;
-			Console.Write("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.ForegroundColor = labelColor;
-			Console.Write("    Shell: ");
-			Console.ForegroundColor = prev;
-			Console.WriteLine(settings.Shell);
-			Console.ForegroundColor = logoColor;
-			Console.Write("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.ForegroundColor = labelColor;
-			Console.Write("    CPU: ");
-			Console.ForegroundColor = prev;
-			Console.WriteLine(settings.CPU);
-			Console.ForegroundColor = logoColor;
-			Console.Write("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.ForegroundColor = labelColor;
-			Console.Write("    RAM: ");
-			Console.ForegroundColor = prev;
-			Console.WriteLine(settings.RAM);
-			Console.ForegroundColor = logoColor;
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("  `yyyyyyyyyyyyyyyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("   ..--:/++ooosssyyyyyyy: -yyyyyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("             ```...--:/+- .oossyyyyyyyyyyyyyyyyyyyyyyyy`");
-			Console.WriteLine("                           ```...--:/++ooosssyyyyyyyyyy`");
-			Console.WriteLine("                                         ```...--::/+oo`");
 		}
 	}
 }

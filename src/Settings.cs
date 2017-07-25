@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Management;
 using Microsoft.Win32;
 
@@ -77,7 +79,32 @@ namespace WinScreenfetch
 				uptime = $"{hours}h {mins}m";
 
 			return uptime;
+		}
 
+		List<Data> m_data;
+		public List<Data> GetWithLabels()
+		{
+			if (m_data == null)
+			{
+				m_data = new List<Data>()
+				{
+					{ new Data { Value=$"{UserName}@{ComputerName}" } },
+					{ new Data { Label="OS", Value=OS} },
+					{ new Data { Label="Manufacturer", Value=Manufacturer} },
+					{ new Data { Label="Uptime", Value=Uptime} },
+					{ new Data { Label="Shell", Value=Shell} },
+					{ new Data { Label="CPU", Value=CPU} },
+					{ new Data { Label="RAM", Value=RAM} }
+				};
+			}
+
+			return m_data;
+		}
+
+		public class Data
+		{
+			public string Label { get; set; }
+			public string Value { get; set; }
 		}
 	}
 }
