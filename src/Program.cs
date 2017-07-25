@@ -12,17 +12,15 @@ namespace WinScreenfetch
 
 		static void Main(string[] args)
 		{
-			
+
 			try
 			{
 
 				Console.WriteLine();
 
-				//http://www.text-image.com/convert/ascii.html
-
 				BigLogo();
 
-				}
+			}
 			catch (Exception ex)
 			{
 				Console.ForegroundColor = ConsoleColor.DarkRed;
