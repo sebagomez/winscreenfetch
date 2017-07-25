@@ -6,4 +6,4 @@ Tired of seeing those cool ascii Linux distro's logos? now you can have your own
 
 WinScreenfetch is exactly that. screenfetch for Windows.
 
-<img src="screenshot.png" alt="shelltwit on windows" width="700">
+<img src="./screenshot.png" alt="WinScreenfetch" width="700">
