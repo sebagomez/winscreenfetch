@@ -1,0 +1,16 @@
+
+https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package
+
+Copiar el ex a folder donde quee solo 
+Create nuspec
+nuget spec WinScreenfetch.exe
+choco new
+
+Modify its data
+
+Create nupkg
+nuget pack WinScreenfetch.nuspec
+choco pack WinScreenfetch.nuspec
+
+Publish
+choco push WinScreenfetch.0.5.1.nupkg --source https://push.chocolatey.org/

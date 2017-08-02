@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>WinScreenfetch</id>
+    <version>0.5.1</version>
+    <packageSourceUrl>https://github.com/sebagomez/winscreenfetch</packageSourceUrl>
+    <owners>Seba Gomez</owners>
+    <title>WinScreenfetch</title>
+    <authors>Seba Gomez</authors>
+    <projectUrl>https://github.com/sebagomez/winscreenfetch</projectUrl>
+    <iconUrl>https://github.com/sebagomez/winscreenfetch/raw/master/src/if_windows-10_1269925.ico</iconUrl>
+    <copyright>2017 Seba Gomez</copyright> 
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl> 
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/sebagomez/winscreenfetch</projectSourceUrl>
+    <tags>screenfetch cli</tags>
+    <summary>Screenfetch for Windows</summary>
+    <description>Tired of seeing those cool ascii Linux distro's logos? now you can have it in your favorite OS.</description>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="bin\**" target="." />
+  </files>
+</package>

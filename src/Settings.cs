@@ -10,6 +10,7 @@ namespace WinScreenfetch
 		public string ComputerName { get; set; }
 		public string UserName { get; set; }
 		public string OS { get; set; }
+		public string Version { get; set; }
 		public string Uptime { get; set; }
 		public string Manufacturer { get; set; }
 		public string Shell { get; set; }
@@ -20,16 +21,19 @@ namespace WinScreenfetch
 		{
 			ComputerName = Environment.MachineName;
 			UserName = Environment.UserName;
-			OS = GetOSName();
+			GetOSAndVerion();
 			Uptime = GetUptime();
 			Shell = Environment.GetEnvironmentVariable("ComSpec");
 			SetCPUAndMemory();
 		}
 
-		private string GetOSName()
+		private void GetOSAndVerion()
 		{
 			using (RegistryKey reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-				return $"{reg.GetValue("ProductName")} Version {reg.GetValue("ReleaseId")} (OS Build {reg.GetValue("CurrentBuildNumber")}.{reg.GetValue("UBR")})";
+			{
+				OS= $"{reg.GetValue("ProductName")}";
+				Version = $"{reg.GetValue("ReleaseId")} (OS Build {reg.GetValue("CurrentBuildNumber")}.{reg.GetValue("UBR")})";
+			}
 		}
 
 		private void SetCPUAndMemory()
@@ -89,6 +93,7 @@ namespace WinScreenfetch
 				{
 					{ new Data { Value=$"{UserName}@{ComputerName}" } },
 					{ new Data { Label="OS", Value=OS} },
+					{ new Data { Label="Version", Value=Version } },
 					{ new Data { Label="Manufacturer", Value=Manufacturer} },
 					{ new Data { Label="Uptime", Value=Uptime} },
 					{ new Data { Label="Shell", Value=Shell} },
