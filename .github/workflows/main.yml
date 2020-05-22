@@ -55,10 +55,6 @@ jobs:
       run: .\deploy.ps1 .\bin\ ${env:Configuration}
       shell: powershell
 
-    - name: Zip it! 
-      run: Compress-Archive .\bin\* WinScreenfetch.zip
-      shell: powershell
-
     - name: Create a Release
       id: create_release
       uses: actions/create-release@v1
@@ -66,7 +62,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         tag_name: ${{ env.TIMESTAMP }}
-        release_name: Release ${{ env.TIMESTAMP }} (gxcli ${{ env.WINS_VERSION }})
+        release_name: Release ${{ env.TIMESTAMP }} (WinScreenfetch ${{ env.WINS_VERSION }})
 
     - name: Upload Release Asset
       id: upload-release-asset 
@@ -75,6 +71,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./WinScreenfetch.zip
-        asset_name: WinScreenfetch_${{ env.WINS_VERSION }}).zip
-        asset_content_type: application/zip
+        asset_path: ./bin/WinScreenfetch.exe
+        asset_name: WinScreenfetch.exe
+        asset_content_type: application/octet-stream
