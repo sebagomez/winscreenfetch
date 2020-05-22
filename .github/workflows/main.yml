@@ -56,7 +56,7 @@ jobs:
       shell: powershell
 
     - name: Zip it! 
-      run: Compress-Archive .\bin\* ${env:Project}.zip
+      run: Compress-Archive .\bin\* WinScreenfetch.zip
       shell: powershell
 
     - name: Create a Release
@@ -75,6 +75,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${env:Project}.zip
-        asset_name: ${env:Project}_${{ env.WINS_VERSION }}).zip
+        asset_path: ./WinScreenfetch.zip
+        asset_name: WinScreenfetch_${{ env.WINS_VERSION }}).zip
         asset_content_type: application/zip
